@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { ChevronLeft, Save, Users, Calendar, Folder, Upload, Lock,Mail, Eye } from 'lucide-react';
+import { ChevronLeft, Save, Users, Calendar, Folder, Upload, Lock,Mail, Eye , Brain } from 'lucide-react';
+import AIAssistant from './AIAssistant'; // New Import
 
 const THEMES = [
   'Childhood',
@@ -19,8 +20,11 @@ const CreateCapsuleForm = ({ onCancel, onSubmit }) => {
     unlockValue: '', // Date or Event description
     recipients: [], // List of emails/users
     notificationEnabled: true,
+    sendFullContent: false,
     privacySetting: 'private',
   });
+
+  const [isAIAssistantOpen, setIsAIAssistantOpen] = useState(false); // New state for AI Modal
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -37,17 +41,32 @@ const CreateCapsuleForm = ({ onCancel, onSubmit }) => {
   };
 
   const handleRecipientChange = (e) => {
+    const emails = e.target.value
+        .split(',')
+        .map(s => s.trim())
+        .filter(s => s.length > 0);
     // Simple comma-separated list for demo
-    setFormData(prev => ({ ...prev, recipients: e.target.value.split(',').map(s => s.trim()).filter(s => s.length > 0) }));
+    setFormData(prev => ({ ...prev, recipients: emails }));
   }
 
-  const handleNext = () => setStep(prev => prev + 1);
+  const handleNext = () => {
+    console.log(`Advancing from Step ${step} to Step ${step + 1}`);
+    setStep(prev => prev + 1);
+  };
   const handlePrev = () => setStep(prev => prev - 1);
   const handleFinalSubmit = () => {
     // Basic validation and submission logic
     console.log("Submitting Capsule with Notifications Enabled:", formData.notificationEnabled);
     onSubmit(formData);
   };
+    const handleAIOpen = () => {
+      if (formData.content.length === 0) {
+          alert("Please upload some files first before using the AI Assistant.");
+          return;
+      }
+      setIsAIAssistantOpen(true);
+  };
+   const handleAIClose = () => setIsAIAssistantOpen(false);
 
   const StepIndicator = ({ number, title }) => (
     <div className={`flex items-center space-x-2 ${step === number ? 'text-indigo-600 font-bold' : 'text-gray-500'}`}>
@@ -119,6 +138,16 @@ const CreateCapsuleForm = ({ onCancel, onSubmit }) => {
                 className="hidden"
               />
             </div>
+
+            {formData.content.length > 0 && (
+                        <button
+                            type="button"
+                            onClick={handleAIOpen}
+                            className="mt-4 bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition duration-150 flex items-center mx-auto shadow-md"
+                        >
+                            <Brain className="w-5 h-5 mr-2" /> Use AI Memory Assistant
+                        </button>
+                    )}
             
             <div className="mt-4">
               <h4 className="font-medium text-gray-700">Files Added ({formData.content.length})</h4>
@@ -130,6 +159,15 @@ const CreateCapsuleForm = ({ onCancel, onSubmit }) => {
                 )}
               </ul>
             </div>
+
+            {isAIAssistantOpen && (
+                        <AIAssistant 
+                            isOpen={isAIAssistantOpen} 
+                            onClose={handleAIClose} 
+                            files={formData.content} // Pass uploaded files to the assistant
+                        />
+                    )}
+
           </section>
         );
 
@@ -203,6 +241,9 @@ const CreateCapsuleForm = ({ onCancel, onSubmit }) => {
                     This capsule is currently set to be **Private** (visible only to assigned recipients). Advanced visibility options can be set later.
                 </p>
             </div>
+            <p className="mt-2 text-sm text-indigo-600 font-medium">
+                        {formData.recipients.length} Recipient(s) Added.
+                    </p>
           </section>
         );
 
@@ -213,7 +254,7 @@ const CreateCapsuleForm = ({ onCancel, onSubmit }) => {
                     <h3 className="text-2xl font-semibold mb-4 text-gray-800">5. Final Settings</h3>
 
                     {/* Email Notifications (REQUIRED FEATURE 4) */}
-                    <div className="p-6 bg-green-50 rounded-lg border border-green-200 mb-6">
+                    <div className="p-6 bg-green-50 rounded-lg border border-green-200 mb-6 space-y-3">
                         <label className="flex items-center space-x-3 cursor-pointer">
                             <input
                                 type="checkbox"
@@ -230,6 +271,27 @@ const CreateCapsuleForm = ({ onCancel, onSubmit }) => {
                         <p className="text-sm text-gray-600 mt-2 ml-8">
                             We will send an email notification to all assigned recipients ({formData.recipients.length} user(s)) on the unlock date/event.
                         </p>
+
+                        {/* NEW: Scheduled Email Delivery Control */}
+                        {formData.notificationEnabled && (
+                            <label className="flex items-center space-x-3 cursor-pointer ml-4 pt-3 border-t border-green-100">
+                                <input
+                                    type="checkbox"
+                                    name="sendFullContent"
+                                    checked={formData.sendFullContent}
+                                    onChange={(e) => setFormData(prev => ({ ...prev, sendFullContent: e.target.checked }))}
+                                    className="h-5 w-5 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500"
+                                />
+                                <span className="font-semibold text-gray-800 flex items-center">
+                                    <Save className="w-4 h-4 mr-2 text-indigo-500" /> 2. **Scheduled Email Delivery** (Send full content)
+                                </span>
+                            </label>
+                        )}
+                        <p className="text-xs text-gray-500 ml-12">
+                            If checked, the full capsule contents (files/text) will be delivered directly via email. (Only links if content size is too large.)
+                        </p>
+
+
                     </div>
 
                     {/* Privacy Controls (OPTIONAL FEATURE 4) */}
@@ -307,7 +369,7 @@ const CreateCapsuleForm = ({ onCancel, onSubmit }) => {
             <button
               type="button"
               onClick={handleNext}
-              disabled={step === 1 && !formData.title ||
+              disabled={(step === 1 && !formData.title) ||
                 (step === 3 && !formData.unlockValue) || // Basic validation for unlock date
                 (step === 4 && formData.recipients.length === 0) // Validation for recipients
               } // Simple validation

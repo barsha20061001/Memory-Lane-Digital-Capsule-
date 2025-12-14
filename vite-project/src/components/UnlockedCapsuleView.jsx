@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { MessageSquare, Heart, Clock, User, Download, Share, PlusCircle } from 'lucide-react';
+import { MessageSquare, Heart, Clock, User, Download, Share, PlusCircle, ChevronLeft } from 'lucide-react';
 
 // Mock data for the unlocked capsule
 const mockCapsuleData = {
