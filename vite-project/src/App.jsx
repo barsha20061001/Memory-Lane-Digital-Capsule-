@@ -1,35 +1,67 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { useState } from 'react';
+import Dashboard from './components/Dashboard';
+import CreateCapsuleForm from './components/CreateCapsuleForm';
+import UnlockedCapsuleView from './components/UnlockedCapsuleView'; // New Import
 
 function App() {
-  const [count, setCount] = useState(0)
+  // Can be 'dashboard', 'create', or 'view'
+  const [view, setView] = useState('dashboard'); 
+  const [selectedCapsuleId, setSelectedCapsuleId] = useState(null);
+
+  const handleCreateNew = () => setView('create');
+
+  const handleCapsuleSubmit = (data) => {
+    console.log("Capsule Saved:", data);
+    alert(`Capsule "${data.title}" has been created!`);
+    setView('dashboard');
+  };
+  
+  // New handler for clicking on a capsule card
+  const handleViewCapsule = (id) => {
+      setSelectedCapsuleId(id);
+      setView('view');
+  }
+
+  // Header component updated to reflect the new state logic (same as before)
+  const Header = ({ onCreateNew }) => (
+    <header className="bg-white shadow-md sticky top-0 z-10">
+      <div className="container mx-auto px-4 py-4 flex justify-between items-center">
+        <h1 className="text-2xl font-bold text-indigo-700 cursor-pointer" onClick={() => setView('dashboard')}>
+          MemoryLane
+        </h1>
+        <nav>
+          <button 
+            onClick={onCreateNew}
+            className="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition duration-150 shadow-md ml-4"
+          >
+            Create Capsule
+          </button>
+        </nav>
+      </div>
+    </header>
+  );
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div className="min-h-screen flex flex-col">
+      <Header onCreateNew={handleCreateNew} />
+      <main className="container mx-auto px-4 py-8 flex-grow">
+        {view === 'dashboard' && <Dashboard onViewCapsule={handleViewCapsule} />} 
+        {view === 'create' && <CreateCapsuleForm onCancel={() => setView('dashboard')} onSubmit={handleCapsuleSubmit} />}
+        {view === 'view' && <UnlockedCapsuleView onBack={() => setView('dashboard')} />} 
+        {/* We use a mock data set in UnlockedCapsuleView for now, ignoring selectedCapsuleId */}
+      </main>
+      <Footer />
+    </div>
+  );
 }
 
-export default App
+// Basic Footer Component (same as before)
+const Footer = () => (
+  <footer className="bg-gray-800 text-white mt-auto">
+    <div className="container mx-auto px-4 py-6 text-center text-sm">
+      © 2025 MemoryLane Platform. Preserving memories for the future.
+    </div>
+  </footer>
+);
+
+export default App;

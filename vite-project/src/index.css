@@ -5,3 +5,6 @@
 
 
 
+body {
+  background-color: #b2bfcb; /* Tailwind's bg-gray-50 */
+}
