@@ -7,9 +7,9 @@ const mockCapsuleData = {
   title: "First Anniversary Message",
   theme: "Family History",
   unlockDate: "2025-01-20",
-  unlockedBy: "Mom (Sarah L.)",
+  unlockedBy: "Mom (Riya)",
   contents: [
-    { type: 'text', title: 'Letter from Dad', content: 'My dearest Sarah, if you are reading this, it means we made it to our first year...', icon: 'FileText' },
+    { type: 'text', title: 'Letter from Dad', content: 'My dearest Riya, if you are reading this, it means we made it to our first year...', icon: 'FileText' },
     { type: 'photo', title: 'Wedding Photo', content: 'Our favorite photo from the ceremony.', icon: 'Image' },
     { type: 'video', title: 'Anniversary Toast', content: 'A short video message recorded a week before the wedding.', icon: 'Video' },
   ],
@@ -18,7 +18,7 @@ const mockCapsuleData = {
     mode: 'enabled',
   },
   reflections: [ // This handles the Post-Unlock Interaction feature
-    { user: 'Sarah L.', timestamp: '2025-01-20 10:30 AM', text: "I can't believe how much time has passed! This is such a beautiful surprise. I love you, honey. ❤️" },
+    { user: 'Riya', timestamp: '2025-01-20 10:30 AM', text: "I can't believe how much time has passed! This is such a beautiful surprise. I love you, honey. ❤️" },
     { user: 'Admin System', timestamp: '2025-01-20 10:31 AM', text: "The capsule contents have been scheduled for email delivery to all recipients. (Email Notification Feature)"},
   ]
 };

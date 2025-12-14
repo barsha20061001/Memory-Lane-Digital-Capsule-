@@ -42,13 +42,15 @@ function App() {
   );
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col app-background">
       <Header onCreateNew={handleCreateNew} />
-      <main className="container mx-auto px-4 py-8 flex-grow">
+      <main className=" flex-grow">
+        <div className="container mx-auto px-4 py-8">
         {view === 'dashboard' && <Dashboard onViewCapsule={handleViewCapsule} />} 
         {view === 'create' && <CreateCapsuleForm onCancel={() => setView('dashboard')} onSubmit={handleCapsuleSubmit} />}
         {view === 'view' && <UnlockedCapsuleView onBack={() => setView('dashboard')} />} 
         {/* We use a mock data set in UnlockedCapsuleView for now, ignoring selectedCapsuleId */}
+      </div>
       </main>
       <Footer />
     </div>

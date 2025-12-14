@@ -4,7 +4,6 @@
 @tailwind utilities;
 
 
-
 body {
-  background-color: #b2bfcb; /* Tailwind's bg-gray-50 */
+  background-color: #bdc5cd; /* Tailwind's bg-gray-50 */
 }
