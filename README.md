@@ -27,3 +27,26 @@
 ├── vite-project/       # React frontend
 │   ├── src/components/ # Dashboard and Form components
 │   └── src/App.jsx     # Main frontend logic
+
+
+ 📝 Author
+Barsha - GitHub Profile
+
+📜 License
+This project is licensed under the MIT License.
+
+
+---
+
+### How to add this to your GitHub:
+1.  Open VS Code and create a new file named **`README.md`** in your main folder.
+2.  Paste the text above into it.
+3.  Replace the `[PASTE_YOUR_LINK_HERE]` parts with your actual links.
+4.  Run these commands in your terminal to save it to GitHub:
+    ```bash
+    git add README.md
+    git commit -m "Add professional README"
+    git push origin main
+    ```
+
+
