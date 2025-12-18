@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
+//import Register from './Register'; // <-- Import the component
 import Dashboard from './components/Dashboard';
 import CreateCapsuleForm from './components/CreateCapsuleForm';
 import UnlockedCapsuleView from './components/UnlockedCapsuleView'; // New Import
+
+
+
 
 function App() {
   // Can be 'dashboard', 'create', or 'view'
@@ -42,15 +46,24 @@ function App() {
   );
 
   return (
-    <div className="min-h-screen flex flex-col app-background">
-      <Header onCreateNew={handleCreateNew} />
-      <main className=" flex-grow">
-        <div className="container mx-auto px-4 py-8">
-        {view === 'dashboard' && <Dashboard onViewCapsule={handleViewCapsule} />} 
+    <div className="min-h-screen flex flex-col bg-gray-200">
+    <Header onCreateNew={handleCreateNew} />
+      <main className=" flex-grow ">
+        
+      
+        
+
+<div className="container mx-auto px-4 py-8">
+    {/* 🛑 TEMPORARY CODE FOR API REGISTRATION TEST 🛑 */}
+    
+    
+    
+    {/* *** RESTORED ORIGINAL DASHBOARD CODE *** */}
+        {view === 'dashboard' && <Dashboard onViewCapsule={handleViewCapsule} />}
         {view === 'create' && <CreateCapsuleForm onCancel={() => setView('dashboard')} onSubmit={handleCapsuleSubmit} />}
-        {view === 'view' && <UnlockedCapsuleView onBack={() => setView('dashboard')} />} 
-        {/* We use a mock data set in UnlockedCapsuleView for now, ignoring selectedCapsuleId */}
-      </div>
+        {view === 'view' && <UnlockedCapsuleView onBack={() => setView('dashboard')} />}
+
+</div>
       </main>
       <Footer />
     </div>

@@ -1,6 +1,56 @@
 import React, { useState } from 'react';
 import { ChevronLeft, Save, Users, Calendar, Folder, Upload, Lock,Mail, Eye , Brain } from 'lucide-react';
 import AIAssistant from './AIAssistant'; // New Import
+// Inside CreateCapsuleForm.jsx
+
+//const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3000/api';
+
+//const handleSubmit = async (e) => {
+   // e.preventDefault();
+
+   // try {
+        // Send form data to the new backend route
+       // const response = await axios.post(`${API_BASE_URL}/memories`, {
+         //   title,
+         //   theme,
+         //   unlockDate, // Ensure this matches your state variable name
+        //});
+
+       // console.log('Capsule saved successfully:', response.data.capsule);
+
+        // Redirect back to the dashboard after successful save
+       // onCancel(); 
+
+   // } catch (error) {
+     //   console.error('Failed to create capsule:', error.response?.data?.message || error.message);
+     //   alert('Error creating capsule. Please check your console for details.');
+    //}
+//};
+// Inside CreateCapsuleForm.jsx
+
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3000/api';
+
+const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+        // Send form data to the new backend route
+        const response = await axios.post(`${API_BASE_URL}/memories`, {
+            title,
+            theme,
+            unlockDate, // Ensure this matches your state variable name
+        });
+
+        console.log('Capsule saved successfully:', response.data.capsule);
+
+        // Redirect back to the dashboard after successful save
+        onCancel(); 
+
+    } catch (error) {
+        console.error('Failed to create capsule:', error.response?.data?.message || error.message);
+        alert('Error creating capsule. Please check your console for details.');
+    }
+};
 
 const THEMES = [
   'Childhood',

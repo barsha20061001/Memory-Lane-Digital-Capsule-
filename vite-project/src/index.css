@@ -4,6 +4,24 @@
 @tailwind utilities;
 
 
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-y: auto;
+  
+  overflow-x: hidden; /* Prevent horizontal scroll */
+}
 body {
   background-color: #bdc5cd; /* Tailwind's bg-gray-50 */
+}
+.container {
+    /* No custom background attachment needed here */
+    max-width: 1280px; /* Optional: Sets a maximum width for large screens */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+ #root {
+  height: 100%;
 }
