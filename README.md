@@ -29,10 +29,10 @@
 │   └── src/App.jsx     # Main frontend logic
 
 
- ## 📝 Author
+📝 Author
 Barsha - GitHub Profile
 
- ## 📜 License
+ # ** 📜 License **
 This project is licensed under the MIT License.
 
 
