@@ -100,7 +100,6 @@ const Dashboard = ({ onViewCapsule }) => {
           <CapsuleCard key={capsule.id} capsule={capsule} onView={onViewCapsule} onContribute={handleContributeOpen}/>
         ))}
 
-
       </div>
 
       {selectedCapsule && (
@@ -115,3 +114,4 @@ const Dashboard = ({ onViewCapsule }) => {
 };
 
 export default Dashboard;
+

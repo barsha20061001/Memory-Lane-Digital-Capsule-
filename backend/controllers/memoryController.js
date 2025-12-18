@@ -7,7 +7,7 @@ exports.createMemory = async (req, res) => {
     const { title, theme, unlockDate } = req.body;
 
     // Bypass login check for quick finishing
-    const user_id = HARDCODED_USER_ID; 
+    const user_id = 1; 
 
     if (!title || !theme || !unlockDate) {
         return res.status(400).json({ message: 'All fields are required.' });

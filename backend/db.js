@@ -1,4 +1,3 @@
-// memorylane-backend/db.js
 const { Pool } = require('pg');
 require('dotenv').config();
 
@@ -10,10 +9,22 @@ const pool = new Pool({
     port: process.env.DB_PORT,
 });
 
-// Optional: Test the connection on server startup
-pool.query('SELECT NOW()')
-    .then(res => console.log('Database connected successfully at:', res.rows[0].now))
-    .catch(err => console.error('Database connection error:', err.stack));
+// 🚀 AUTO-CREATE TABLE SCRIPT
+const createTableQuery = `
+  CREATE TABLE IF NOT EXISTS memories (
+    memory_id SERIAL PRIMARY KEY,
+    user_id INTEGER NOT NULL,
+    title VARCHAR(100) NOT NULL,
+    theme VARCHAR(50) NOT NULL,
+    unlock_date DATE NOT NULL,
+    is_locked BOOLEAN DEFAULT TRUE,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+  );
+`;
+
+pool.query(createTableQuery)
+    .then(() => console.log('✅ Memories table is ready (checked/created)'))
+    .catch(err => console.error('❌ Error creating table:', err));
 
 module.exports = {
     query: (text, params) => pool.query(text, params),

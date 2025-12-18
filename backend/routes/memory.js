@@ -63,7 +63,19 @@ router.post('/', auth, async (req, res) => {
 });
 
 // memorylane-backend/routes/memory.js
+// backend/routes/memory.js
 
+// This route sends all capsules from the database to the frontend
+router.get('/', async (req, res) => {
+    try {
+        const { pool } = require('../db');
+        const result = await pool.query('SELECT * FROM memories ORDER BY created_at DESC');
+        res.json(result.rows);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ message: "Error fetching capsules" });
+    }
+});
 // ... (existing router.post('/') Create route)
 
 // GET /api/memories/ - Get all memories for the logged-in user
