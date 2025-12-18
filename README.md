@@ -29,36 +29,11 @@
 │   └── src/App.jsx     # Main frontend logic
 
 
----
-
-## 👤 Author
-
-**Barsha** [![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/barsha20061001)
-
-> "Building digital capsules to preserve your most precious moments."
-
----
-
-## 📜 License
 
 
 
-This project is licensed under the **MIT License**.  
-Feel free to use, study, and modify this project for your own learning!
 
-Copyright (c) 2024 **Barsha**
 
----
-
-### How to add this to your GitHub:
-1.  Open VS Code and create a new file named **`README.md`** in your main folder.
-2.  Paste the text above into it.
-3.  Replace the `[PASTE_YOUR_LINK_HERE]` parts with your actual links.
-4.  Run these commands in your terminal to save it to GitHub:
-    ```bash
-    git add README.md
-    git commit -m "Add professional README"
-    git push origin main
-    ```
+   
 
 
