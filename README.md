@@ -29,12 +29,24 @@
 │   └── src/App.jsx     # Main frontend logic
 
 
-📝 Author
-Barsha - GitHub Profile
+---
 
- # 📜 ** License **
-This project is licensed under the MIT License.
+## 👤 Author
 
+**Barsha** [![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/barsha20061001)
+
+> "Building digital capsules to preserve your most precious moments."
+
+---
+
+## 📜 License
+
+
+
+This project is licensed under the **MIT License**.  
+Feel free to use, study, and modify this project for your own learning!
+
+Copyright (c) 2024 **Barsha**
 
 ---
 
