@@ -4,7 +4,7 @@
 
 ## 🚀 Live Demo
 - **Frontend (Vercel):** [https://memory-lane-digital-capsule-cul24ypr0-barshas-projects-d9a38869.vercel.app/]
-- **Backend (Render/Railway):** [PASTE_YOUR_RENDER_LINK_HERE]
+- **Backend (Render/Railway):** 
 
 ## ✨ Features
 - **Create Capsules:** Save memories with a title, custom theme (Birthday, Anniversary, etc.), and a specific reveal date.
